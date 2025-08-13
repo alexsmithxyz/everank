@@ -1,0 +1,15 @@
+FROM ruby:3.4
+
+RUN apt-get update && apt-get install -y watchman tini
+
+WORKDIR /app
+
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+COPY . .
+
+ENTRYPOINT ["tini", "--", "/app/bin/docker-entrypoint"]
+
+EXPOSE 3000
+CMD ["./bin/dev"]

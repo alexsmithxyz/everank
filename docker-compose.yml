@@ -1,0 +1,34 @@
+services:
+  db:
+    image: "postgres:17"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    tty: true
+    stdin_open: true
+    environment:
+      - DATABASE_USER=${POSTGRES_USER}
+      - DATABASE_HOST=db
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      # 👇 ignore files/directories
+      - /dev/null:/app/Dockerfile
+      - /dev/null:/app/Dockerfile.dev
+      - /dev/null:/app/docker-compose.yml
+      - /dev/null:/app/.env
+      - /app/.git
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
