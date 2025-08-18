@@ -21,6 +21,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
+      - bundle_cache:/usr/local/bundle
       # 👇 ignore files/directories
       - /dev/null:/app/Dockerfile
       - /dev/null:/app/Dockerfile.dev
@@ -32,3 +33,4 @@ services:
 
 volumes:
   postgres_data:
+  bundle_cache:
