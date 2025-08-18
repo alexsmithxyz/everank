@@ -1,6 +1,22 @@
-FROM ruby:3.4
+FROM ruby:3.4-trixie
 
-RUN apt-get update && apt-get install -y watchman tini
+RUN apt-get update && apt-get install -y tini jq
+
+WORKDIR /tmp
+
+# Install watchman
+RUN set -ex && \
+    WATCHMAN_URL=$(curl -s -H 'content-type:application/json' \
+        https://api.github.com/repos/facebook/watchman/releases | \
+        jq -r 'first(.[] | select(.assets | length > 0)).assets[0].browser_download_url') && \
+    wget "$WATCHMAN_URL" && \
+    unzip watchman-*-linux.zip && \
+    mkdir -p /usr/local/bin /usr/local/lib /usr/local/var/run/watchman && \
+    cp watchman-*-linux/bin/* /usr/local/bin/ && \
+    cp watchman-*-linux/lib/* /usr/local/lib/ && \
+    chmod 755 /usr/local/bin/watchman && \
+    chmod 2777 /usr/local/var/run/watchman && \
+    rm -rf watchman-*-linux*
 
 WORKDIR /app
 
