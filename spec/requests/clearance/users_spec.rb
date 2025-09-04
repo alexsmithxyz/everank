@@ -24,7 +24,6 @@ RSpec.describe 'Clearance::Users', type: :request do
     { email: 'invalid email', password: 'pass' }
   end
 
-  # TODO: write specs for what views/templates should load
   context 'when signed out' do
     describe 'GET /sign_up' do
       it 'renders a successful response' do

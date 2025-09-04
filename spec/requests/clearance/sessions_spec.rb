@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Clearance::Sessions', type: :request do
-  # TODO: write specs for what views/templates should load
   context 'when signed in' do
     include_context 'signed in user'
 
