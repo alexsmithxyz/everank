@@ -14,9 +14,7 @@ services:
     tty: true
     stdin_open: true
     environment:
-      - DATABASE_USER=${POSTGRES_USER}
-      - DATABASE_HOST=db
-      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432
     ports:
       - "3000:3000"
     volumes:
