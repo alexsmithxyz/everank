@@ -56,8 +56,8 @@ group :development, :test do
 
   gem "ruby-lsp", require: false
 
-  gem 'rspec-rails', '~> 8.0.0'
-  gem 'factory_bot_rails', '~> 6.5'
+  gem "rspec-rails", "~> 8.0.0"
+  gem "factory_bot_rails", "~> 6.5"
 end
 
 group :development do
