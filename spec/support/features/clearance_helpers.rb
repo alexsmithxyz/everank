@@ -2,7 +2,7 @@ module Features
   module ClearanceHelpers
     def reset_password_for(email)
       visit new_password_path
-      fill_in "password_email", with: email
+      fill_in 'Email', with: email
       click_button I18n.t("helpers.submit.password.submit")
     end
 
@@ -14,8 +14,8 @@ module Features
 
     def sign_in_with(email, password)
       visit sign_in_path
-      fill_in "session_email", with: email
-      fill_in "session_password", with: password
+      fill_in 'Email', with: email
+      fill_in 'Password', with: password
       click_button I18n.t("helpers.submit.session.submit")
     end
 
@@ -25,8 +25,8 @@ module Features
 
     def sign_up_with(email, password)
       visit sign_up_path
-      fill_in "user_email", with: email
-      fill_in "user_password", with: password
+      fill_in 'Email', with: email
+      fill_in 'Password', with: password
       click_button I18n.t("helpers.submit.user.create")
     end
 

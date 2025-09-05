@@ -42,7 +42,7 @@ RSpec.feature "Visitor updates password" do
   end
 
   def change_password_to(password)
-    fill_in "password_reset_password", with: password
+    fill_in 'Choose password', with: password
     click_button I18n.t("helpers.submit.password_reset.submit")
   end
 end
