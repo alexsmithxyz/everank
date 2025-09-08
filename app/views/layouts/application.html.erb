@@ -22,22 +22,32 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="bg-gray-100">
     <div id="flash">
       <% flash.each do |key, value| %>
         <div class="flash <%= key %>"><%= value %></div>
       <% end %>
     </div>
 
-    <% if signed_in? %>
-      Signed in as: <%= current_user.email %>
-      <%= button_to 'Sign out', sign_out_path, method: :delete %>
-    <% elsif %w[sessions users].exclude?(controller_name) %>
-      <%= link_to 'Sign in', sign_in_path %>
-      <%= link_to 'Sign up', sign_up_path %>
-    <% end %>
+    <nav class="bg-white shadow-sm p-5 flex items-center justify-between">
+      <%= link_to 'Everank', root_path, class: 'text-xl font-semibold' %>
 
-    <main class="container mx-auto mt-28 px-5 flex">
+      <span class="flex items-center">
+        <% if signed_in? %>
+          <p class="mr-5 text-gray-600"><%= t('.signed_in_as') %>: <%= current_user.email %></p>
+          <%= button_to t('.sign_out'), sign_out_path, method: :delete, class: 'm-0' %>
+        <% elsif %w[sessions users].exclude?(controller_name) %>
+          <%= link_to t('.sign_in'), sign_in_path,
+            class: class_names('mr-5': Clearance.configuration.allow_sign_up?) %>
+
+          <% if Clearance.configuration.allow_sign_up? %>
+            <%= link_to t('sessions.form.sign_up'), sign_up_path %>
+          <% end %>
+        <% end %>
+      </span>
+    </nav>
+
+    <main class="container mx-auto mt-15 px-5 py-10 bg-white shadow-sm">
       <%= yield %>
     </main>
   </body>

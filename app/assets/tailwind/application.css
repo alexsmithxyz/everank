@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@layer base {
+  h2 {
+    @apply text-xl font-semibold mb-5;
+  }
+
+  form {
+    @apply space-y-5;
+  }
+
+  input[type="email"], input[type="password"] {
+    @apply w-full outline-1 outline-gray-300 mt-2 px-3 py-1.5 rounded-md;
+  }
+
+  input[type="submit"] {
+    @apply w-full px-3 py-1.5 rounded-md cursor-pointer bg-blue-500 text-white;
+  }
+
+  main a {
+    @apply text-blue-500 hover:underline;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .other-links {
+    @apply flex flex-col text-center;
+  }
+
+  #clearance {
+      @apply w-full sm:mx-auto sm:w-full max-w-full sm:max-w-sm;
+  }
+
+  #clearance p {
+    @apply text-gray-600 mb-5;
+  }
+}
