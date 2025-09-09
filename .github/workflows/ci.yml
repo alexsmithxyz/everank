@@ -72,7 +72,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
         run: |
           docker compose up -d db
-          docker compose run --rm web bin/rails db:test:prepare spec
+          docker compose run -e RAILS_ENV --rm web bin/rails db:test:prepare spec
           docker compose down
 
       - name: Keep screenshots from failed system tests
