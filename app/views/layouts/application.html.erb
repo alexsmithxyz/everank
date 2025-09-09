@@ -25,7 +25,10 @@
   <body class="bg-gray-100">
     <div id="flash">
       <% flash.each do |key, value| %>
-        <div class="flash <%= key %>"><%= value %></div>
+        <div class="flash <%= key %>" data-controller="flash">
+          <p><%= value %></p>
+          <button class="text-xl hidden" data-flash-target="dismiss">×</button>
+        </div>
       <% end %>
     </div>
 
