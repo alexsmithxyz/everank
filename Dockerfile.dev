@@ -1,6 +1,6 @@
 FROM ruby:3.4-trixie
 
-RUN apt-get update && apt-get install -y tini jq
+RUN apt-get update && apt-get install -y tini jq firefox-esr
 
 WORKDIR /tmp
 

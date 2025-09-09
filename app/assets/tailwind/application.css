@@ -32,10 +32,26 @@
   }
 
   #clearance {
-      @apply w-full sm:mx-auto sm:w-full max-w-full sm:max-w-sm;
+    @apply w-full sm:mx-auto max-w-full sm:max-w-sm;
   }
 
   #clearance p {
     @apply text-gray-600 mb-5;
+  }
+
+  #flash {
+    @apply fixed w-full max-w-md left-1/2 transform -translate-x-1/2 flex flex-col items-center top-10 z-50 space-y-2.5;
+  }
+
+  .flash {
+    @apply flex justify-between items-center shadow-sm w-full rounded-md py-2.5 px-7.5;
+  }
+
+  .flash.alert {
+    @apply bg-red-100 text-red-700;
+  }
+
+  .flash.notice {
+    @apply bg-blue-100 text-blue-700;
   }
 }
