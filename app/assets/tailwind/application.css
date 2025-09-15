@@ -2,7 +2,19 @@
 
 @layer base {
   h2 {
+    @apply text-2xl font-semibold mb-5;
+  }
+
+  header h2 {
+    @apply mb-0
+  }
+
+  h3 {
     @apply text-xl font-semibold mb-5;
+  }
+
+  li h3 {
+    @apply text-base mb-0;
   }
 
   form {
@@ -23,6 +35,18 @@
 
   button {
     @apply cursor-pointer;
+  }
+
+  ul li {
+    @apply border-b border-gray-300 pb-5 pt-5 first:pt-0 last:border-b-0 last:pb-0;
+  }
+
+  time {
+    @apply text-sm text-gray-500;
+  }
+
+  section {
+    @apply mt-5 mb-5 last:mb-0;
   }
 }
 

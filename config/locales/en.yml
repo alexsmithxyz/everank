@@ -31,3 +31,10 @@ en:
   layouts:
     application:
       signed_in_as: Signed in as
+  titles:
+    index:
+      titles: Titles
+      show: View this title
+    show:
+      return: Back to titles
+      description: Description

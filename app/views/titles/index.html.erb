@@ -1,0 +1,22 @@
+<% content_for :title, t('.titles') %>
+
+<h2><%= t '.titles' %></h2>
+
+<section>
+  <ul id="titles">
+    <% @titles.each do |title| %>
+      <li id="<%= dom_id title %>">
+        <article class="flex justify-between items-center">
+          <header>
+            <h3><%= title.name %></h3>
+            <%= time_tag title.date_available %>
+          </header>
+
+          <nav>
+            <%= link_to t('.show'), title %>
+          </nav>
+        </article>
+      </li>
+    <% end %>
+  </ul>
+</section>
