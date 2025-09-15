@@ -32,23 +32,25 @@
       <% end %>
     </div>
 
-    <nav class="bg-white shadow-sm p-5 flex items-center justify-between">
-      <%= link_to 'Everank', root_path, class: 'text-xl font-semibold' %>
+    <header>
+      <nav class="bg-white shadow-sm p-5 flex items-center justify-between">
+        <%= link_to 'Everank', root_path, class: 'text-xl font-semibold' %>
 
-      <span class="flex items-center">
-        <% if signed_in? %>
-          <p class="mr-5 text-gray-600"><%= t('.signed_in_as') %>: <%= current_user.email %></p>
-          <%= button_to t('.sign_out'), sign_out_path, method: :delete, class: 'm-0' %>
-        <% elsif %w[sessions users].exclude?(controller_name) %>
-          <%= link_to t('.sign_in'), sign_in_path,
-            class: class_names('mr-5': Clearance.configuration.allow_sign_up?) %>
+        <span class="flex items-center">
+          <% if signed_in? %>
+            <p class="mr-5 text-gray-600"><%= t('.signed_in_as') %>: <%= current_user.email %></p>
+            <%= button_to t('.sign_out'), sign_out_path, method: :delete, class: 'm-0' %>
+          <% elsif %w[sessions users].exclude?(controller_name) %>
+            <%= link_to t('.sign_in'), sign_in_path,
+              class: class_names('mr-5': Clearance.configuration.allow_sign_up?) %>
 
-          <% if Clearance.configuration.allow_sign_up? %>
-            <%= link_to t('sessions.form.sign_up'), sign_up_path %>
+            <% if Clearance.configuration.allow_sign_up? %>
+              <%= link_to t('sessions.form.sign_up'), sign_up_path %>
+            <% end %>
           <% end %>
-        <% end %>
-      </span>
-    </nav>
+        </span>
+      </nav>
+    </header>
 
     <main class="container mx-auto mt-15 px-5 py-10 bg-white shadow-sm">
       <%= yield %>
