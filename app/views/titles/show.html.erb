@@ -1,0 +1,14 @@
+<article>
+  <header>
+    <h2><%= @title.name %></h2>
+    <%= time_tag @title.date_available %>
+  </header>
+
+  <section aria-label="<%= t '.description' %>">
+    <p><%= @title.description %></p>
+  </section>
+
+  <nav>
+    <%= link_to t('.return'), titles_path %>
+  </nav>
+</article>
