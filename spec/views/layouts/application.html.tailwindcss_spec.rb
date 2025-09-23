@@ -17,13 +17,13 @@ RSpec.describe 'layouts/application', type: :view do
 
       it 'renders notice flash message' do
         expect(rendered).to have_selector('div#flash') do |div|
-          expect(div).to have_selector('div.flash.notice', text: flash_messages[:notice])
+          div.has_selector?('div.flash.notice', text: flash_messages[:notice])
         end
       end
 
       it 'renders alert flash message' do
         expect(rendered).to have_selector('div#flash') do |div|
-          expect(div).to have_selector('div.flash.alert', text: flash_messages[:alert])
+          div.has_selector?('div.flash.alert', text: flash_messages[:alert])
         end
       end
     end
@@ -36,7 +36,7 @@ RSpec.describe 'layouts/application', type: :view do
 
       it "doesn't render flash messages" do
         expect(rendered).to have_selector('div#flash') do |div|
-          expect(div).to have_no_selector('div.flash')
+          div.has_no_selector?('div.flash')
         end
       end
     end
@@ -113,8 +113,8 @@ RSpec.describe 'layouts/application', type: :view do
         sign_out_selector = "form[action=\"#{sign_out_path}\"]"
 
         expect(rendered).to have_selector(sign_out_selector) do |form|
-          expect(form).to have_selector('input[name="_method"][value="delete"]', visible: false)
-          expect(form).to have_button('Sign out')
+          form.has_selector?('input[name="_method"][value="delete"]', visible: false) &&
+            form.has_button?('Sign out')
         end
       end
 
