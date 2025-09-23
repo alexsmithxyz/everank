@@ -44,6 +44,11 @@ RSpec.describe 'layouts/application', type: :view do
 
   describe 'signed in/out content' do
     context 'when signed out' do
+      it 'renders header logo' do
+        render
+        expect_header_logo
+      end
+
       it "doesn't render signed in content" do
         render
         expect(rendered).to have_no_content('Signed in as:')
@@ -92,6 +97,11 @@ RSpec.describe 'layouts/application', type: :view do
         sign_in_as create(:user, email: 'test@example.com')
       end
 
+      it 'renders header logo' do
+        render
+        expect_header_logo
+      end
+
       it 'renders signed in content' do
         render
         expect(rendered).to have_content('Signed in as: test@example.com')
@@ -133,5 +143,9 @@ RSpec.describe 'layouts/application', type: :view do
 
   def expect_no_sign_up_link
     expect(rendered).to have_no_link('Sign up')
+  end
+
+  def expect_header_logo
+    expect(rendered).to have_link('Everank', href: root_path)
   end
 end
