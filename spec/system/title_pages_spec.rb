@@ -1,13 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe "TitlePages", type: :system do
+  before do
+    @titles = [
+
+      create(:title, name: 'First Title', description: 'First title description', date_available: '2025-06-06'),
+      create(:title, name: 'Second Title', description: 'Second title description', date_available: '2025-07-15')
+    ]
+  end
+
   describe 'GET /title/:id' do
     before do
       driven_by :rack_test
     end
 
     it 'renders titles/show' do
-      title = create :title, date_available: '2025-06-06'
+      title = @titles.first
 
       visit "/titles/#{title.id}"
 
@@ -39,17 +47,12 @@ RSpec.describe "TitlePages", type: :system do
     end
   end
 
-  describe 'GET /titles' do
+  describe 'GET /' do
     before do
       driven_by :selenium, using: :headless_firefox
     end
 
     it 'renders titles/index' do
-      titles = [
-        create(:title, name: 'First Title', date_available: '2025-06-06'),
-        create(:title, name: 'Second Title', date_available: '2025-07-15')
-      ]
-
       visit '/'
 
       ul_selector = 'section ul#titles'
@@ -59,9 +62,9 @@ RSpec.describe "TitlePages", type: :system do
       expect(page).to have_selector(ul_selector, count: 1)
 
       within ul_selector do
-        expect(page).to have_selector('li', count: titles.count)
+        expect(page).to have_selector('li', count: @titles.count)
 
-        titles.each do |title|
+        @titles.each do |title|
           li_selector = "li#title_#{title.id}"
           expect(page).to have_selector(li_selector, count: 1)
 
@@ -85,6 +88,50 @@ RSpec.describe "TitlePages", type: :system do
           end
         end
       end
+    end
+  end
+
+  describe 'view titles journey' do
+    before do
+      driven_by :selenium, using: :headless_firefox
+    end
+
+    it 'completes view titles journey' do
+      visit '/'
+
+      @titles.each do |title|
+        expect(page).to have_content(title.name)
+      end
+
+      click_on 'View this title',
+               right_of: find('h3', text: @titles.first.name),
+               above: find('h3', text: @titles.second.name)
+
+      expect(current_path).to eq("/titles/#{@titles.first.id}")
+
+      expect(page).to have_content(@titles.first.name)
+      expect(page).to have_content(@titles.first.description)
+      expect(page).to have_no_content(@titles.second.name)
+      expect(page).to have_no_content(@titles.second.description)
+
+      click_on 'Back to titles'
+
+      @titles.each do |title|
+        expect(page).to have_content(title.name)
+      end
+
+      click_on 'View this title',
+               below: find('h3', text: @titles.first.name),
+               right_of: find('h3', text: @titles.second.name)
+
+      expect(current_path).to eq("/titles/#{@titles.second.id}")
+
+      expect(page).to have_content(@titles.second.name)
+      expect(page).to have_content(@titles.second.description)
+      expect(page).to have_no_content(@titles.first.name)
+      expect(page).to have_no_content(@titles.first.description)
+
+      click_on 'Back to titles'
     end
   end
 
