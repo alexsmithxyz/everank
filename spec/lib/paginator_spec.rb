@@ -30,7 +30,7 @@ RSpec.describe Paginator do
       expect(subject.unresponsive_items.size).to eq(7)
       expect(subject.unresponsive_items.first).to eq(:prev)
       expect(subject.unresponsive_items.second).to eq(1)
-      expect(subject.unresponsive_items[2..-3]).to eq([24, 25, 26])
+      expect(subject.unresponsive_items[2..-3]).to eq([ 24, 25, 26 ])
       expect(subject.unresponsive_items.second_to_last).to eq(50)
       expect(subject.unresponsive_items.last).to eq(:next)
     end

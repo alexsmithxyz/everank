@@ -1,7 +1,7 @@
 class Paginator::PageItem
   DEFAULT_LABELS = {
-    prev: '<',
-    next: '>'
+    prev: "<",
+    next: ">"
   }.freeze
 
   def initialize(pagination:, page:)
@@ -28,13 +28,13 @@ class Paginator::PageItem
   def aria_label
     @aria_label ||=
       if current?
-        'Current Page'
+        "Current Page"
       else
         case @page
         when :prev
-          'Previous Page'
+          "Previous Page"
         when :next
-          'Next Page'
+          "Next Page"
         else
           "Page #{number}"
         end

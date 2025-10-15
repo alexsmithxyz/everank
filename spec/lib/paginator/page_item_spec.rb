@@ -78,7 +78,7 @@ RSpec.describe Paginator::PageItem do
       it 'is true except on first, last, next and previous items' do
         pagination.items.each do |item|
           if ((pagination.current_page - 1)..(pagination.current_page + 1)).cover?(item.number) ||
-             [1, pagination.total_pages].include?(item.number)
+             [ 1, pagination.total_pages ].include?(item.number)
             expect(item.responsive?).to be(false)
           else
             expect(item.responsive?).to be(true)
