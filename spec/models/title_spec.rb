@@ -10,4 +10,10 @@ RSpec.describe Title, type: :model do
       end
     end
   end
+
+  describe '#paginate' do
+    it 'responds to #paginate' do
+      expect(Title).to respond_to(:paginate)
+    end
+  end
 end

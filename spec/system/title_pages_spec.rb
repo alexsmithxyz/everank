@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe "TitlePages", type: :system do
   before do
     @titles = [
-
       create(:title, name: 'First Title', description: 'First title description', date_available: '2025-06-06'),
       create(:title, name: 'Second Title', description: 'Second title description', date_available: '2025-07-15')
     ]
@@ -89,6 +88,24 @@ RSpec.describe "TitlePages", type: :system do
         end
       end
     end
+
+    it 'only has 20 items max per page' do
+      43.times do
+        create :title
+      end
+
+      visit '/'
+
+      expect(page).to have_selector('section ul#titles li', count: 20)
+
+      visit '/?page=2'
+
+      expect(page).to have_selector('section ul#titles li', count: 20)
+
+      visit '/?page=3'
+
+      expect(page).to have_selector('section ul#titles li', count: 5)
+    end
   end
 
   describe 'view titles journey' do
@@ -96,7 +113,7 @@ RSpec.describe "TitlePages", type: :system do
       driven_by :selenium, using: :headless_firefox
     end
 
-    it 'completes view titles journey' do
+    it 'allows the user to view titles and go back' do
       visit '/'
 
       @titles.each do |title|
@@ -132,6 +149,24 @@ RSpec.describe "TitlePages", type: :system do
       expect(page).to have_no_content(@titles.first.description)
 
       click_on 'Back to titles'
+    end
+
+    it 'allows the user to browse pages' do
+      43.times { create :title }
+
+      visit '/'
+
+      click_on '>'
+
+      expect(current_url).to include('/?page=2')
+
+      click_on '3'
+
+      expect(current_url).to include('/?page=3')
+
+      click_on '1'
+
+      expect(current_url).to include('/?page=1')
     end
   end
 

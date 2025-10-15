@@ -1,7 +1,9 @@
 class TitlesController < ApplicationController
   # GET /
   def index
-    @titles = Title.all
+    params[:page] ||= 1
+
+    @paginator, @titles = Title.paginate(per_page: 20, current_page: params[:page])
   end
 
   # GET /titles/1
