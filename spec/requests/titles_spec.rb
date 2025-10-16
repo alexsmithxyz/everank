@@ -13,19 +13,37 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe 'titles', type: :request do
-  describe 'GET /' do
-    it 'renders a successful response' do
-      create :title
-      get titles_url
-      expect(response).to be_successful
+  shared_examples 'title index and show request success' do
+    describe 'GET /' do
+      it 'renders a successful response' do
+        create :title
+        get titles_url
+        expect(response).to be_successful
+      end
+    end
+
+    describe 'GET /titles/:id' do
+      it 'renders a successful response' do
+        title = create :title
+        get title_url(title)
+        expect(response).to be_successful
+      end
     end
   end
 
-  describe 'GET /titles/:id' do
-    it 'renders a successful response' do
-      title = create :title
-      get title_url(title)
-      expect(response).to be_successful
-    end
+  context 'not signed in' do
+    include_examples 'title index and show request success'
+  end
+
+  context 'signed in as ordinary user' do
+    include_context 'ordinary user signed in'
+
+    include_examples 'title index and show request success'
+  end
+
+  context 'signed in as admin' do
+    include_context 'admin user signed in'
+
+    include_examples 'title index and show request success'
   end
 end

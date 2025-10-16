@@ -62,7 +62,7 @@ RSpec.describe 'Clearance::Users', type: :request do
   end
 
   context 'when signed in' do
-    include_context 'signed in user'
+    include_context 'ordinary user signed in'
 
     describe 'GET /sign_up' do
       it 'redirects to root' do
