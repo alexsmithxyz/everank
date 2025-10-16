@@ -6,5 +6,6 @@ FactoryBot.define do
   factory :user do
     email
     password { SecureRandom.alphanumeric }
+    role { :ordinary_user }
   end
 end
