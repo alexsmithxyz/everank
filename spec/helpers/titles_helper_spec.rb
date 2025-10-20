@@ -10,7 +10,7 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe TitlesHelper, type: :helper do
+RSpec.describe 'TitlesHelper', type: :helper do
   describe '#titles_path' do
     it 'returns the root path' do
       expect(titles_path).to eq(root_path)

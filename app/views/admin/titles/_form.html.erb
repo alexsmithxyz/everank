@@ -1,0 +1,22 @@
+<%= form_with(model: [:admin, title]) do |form| %>
+  <%= error_explanation title if title.errors.any? %>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :date_available %>
+    <%= form.date_field :date_available %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.textarea :description, rows: 4 %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

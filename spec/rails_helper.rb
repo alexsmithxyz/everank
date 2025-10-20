@@ -75,5 +75,4 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Requests::ClearanceHelpers, type: :request
-  config.include TitlesHelper, type: :request
 end
