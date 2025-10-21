@@ -34,7 +34,19 @@ en:
   titles:
     index:
       titles: Titles
-      show: View this title
+      show: View
+      new: New title
+      edit: Edit
     show:
       return: Back to titles
       description: Description
+  admin:
+    titles:
+      new:
+        heading: New title
+        return: Back to titles
+      edit:
+        heading: Edit title
+        return: Back to titles
+        show: View this title
+        delete: Delete this title

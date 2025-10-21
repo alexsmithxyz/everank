@@ -12,5 +12,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "titles#index"
 
+  # so we can have `titles_path` as an alias for `root_path`
+  get "/", to: "titles#index", as: :titles
+
   resources :titles, only: :show
+
+  namespace :admin do
+    resources :titles, except: %i[index show]
+  end
 end

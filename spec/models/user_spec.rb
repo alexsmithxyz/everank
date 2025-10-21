@@ -41,6 +41,24 @@ RSpec.describe User, type: :model do
         expect(user).to be_valid
       end
     end
+
+    context 'role' do
+      it 'is required' do
+        user = build(:user, role: nil)
+        expect(user).not_to be_valid
+        expect(user.errors[:role]).to include("can't be blank")
+      end
+
+      it 'must be a valid role' do
+        user = build(:user, role: 'wizard')
+        expect(user).not_to be_valid
+        expect(user.errors[:role]).to include('is not included in the list')
+
+        user = build(:user, role: 999)
+        expect(user).not_to be_valid
+        expect(user.errors[:role]).to include('is not included in the list')
+      end
+    end
   end
 
   describe 'authentication' do
@@ -52,6 +70,20 @@ RSpec.describe User, type: :model do
     it 'does not authenticate with wrong password' do
       create(:user, email: 'test@example.com', password: 'password')
       expect(User.authenticate('test@example.com', 'wrongpassword')).to be_nil
+    end
+  end
+
+  describe 'enum role' do
+    it 'defaults to user' do
+      expect(User.new.role).to eq('ordinary_user')
+    end
+
+    it 'maps integer values correctly' do
+      user = User.new(role: 0)
+      expect(user.role).to eq('ordinary_user')
+
+      user = User.new(role: 1)
+      expect(user.role).to eq('admin')
     end
   end
 end

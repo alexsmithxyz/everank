@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Clearance::Sessions', type: :request do
   context 'when signed in' do
-    include_context 'signed in user'
+    include_context 'ordinary user signed in'
 
     describe 'POST /session' do
       let(:new_user) { create :user, password: 'password' }

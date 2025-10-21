@@ -1,6 +1,9 @@
 <% content_for :title, t('.titles') %>
 
-<h2><%= t '.titles' %></h2>
+<div class="flex justify-between items-center mb-5">
+  <h2 class="mb-0"><%= t '.titles' %></h2>
+  <%= link_to t('.new'), new_admin_title_path if policy(Title).new? %>
+</div>
 
 <section>
   <ul id="titles">
@@ -14,6 +17,11 @@
 
           <nav>
             <%= link_to t('.show'), title %>
+
+            <% if policy(title).edit? %>
+              |
+              <%= link_to t('.edit'), edit_admin_title_path(title) %>
+            <% end %>
           </nav>
         </article>
       </li>

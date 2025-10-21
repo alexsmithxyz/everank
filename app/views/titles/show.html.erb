@@ -1,3 +1,5 @@
+<% content_for :title, @title.name %>
+
 <article>
   <header>
     <h2><%= @title.name %></h2>
@@ -10,5 +12,9 @@
 
   <nav>
     <%= link_to t('.return'), titles_path %>
+    <% if policy(@title).edit? %>
+      |
+      <%= link_to t('.edit'), edit_admin_title_path(@title) %>
+    <% end %>
   </nav>
 </article>

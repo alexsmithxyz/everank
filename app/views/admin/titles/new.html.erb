@@ -1,0 +1,11 @@
+<% content_for :title, "New title" %>
+
+<div class="form-container">
+  <h2><%= t('.heading') %></h2>
+
+  <%= render "form", title: @title %>
+
+  <div class="other-links">
+    <%= link_to t('.return'), titles_path %>
+  </div>
+</div>

@@ -3,8 +3,11 @@ require 'rails_helper'
 RSpec.describe "Paginators", type: :system do
   before do
     driven_by :selenium, using: :headless_firefox
+  end
 
-    60.times { create(:title) }
+  before(:all) do
+    Title.destroy_all
+    create_list :title, 60
   end
 
   # can't use the `right_of` option because either border or inset or both on

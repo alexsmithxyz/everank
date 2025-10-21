@@ -114,7 +114,7 @@ RSpec.describe "Clearance::Passwords", type: :request do
   end
 
   context 'when signed in' do
-    include_context 'signed in user'
+    include_context 'ordinary user signed in'
 
     describe 'GET /passwords/new' do
       it 'redirects to root' do

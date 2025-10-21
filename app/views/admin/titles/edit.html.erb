@@ -1,0 +1,13 @@
+<% content_for :title, "Editing title" %>
+
+<div class="form-container">
+  <h2><%= t('.heading') %></h2>
+
+  <%= render "form", title: @title %>
+
+  <div class="other-links">
+    <%= link_to t('.show'), @title %>
+    <%= button_to t('.delete'), admin_title_path(@title), method: :delete, data: { turbo_confirm: 'Are you sure?' } %>
+    <%= link_to t('.return'), titles_path %>
+  </div>
+</div>
