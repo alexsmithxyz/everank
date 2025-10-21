@@ -12,6 +12,7 @@ require 'rspec/rails'
 require 'support/factory_bot'
 require 'support/clearance'
 require 'support/requests/clearance_helpers'
+require 'support/system/application_helpers'
 require 'pundit/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -75,4 +76,5 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Requests::ClearanceHelpers, type: :request
+  config.include System::ApplicationHelpers, type: :system
 end
